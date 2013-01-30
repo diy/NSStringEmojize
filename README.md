@@ -10,7 +10,8 @@ In order to use NSString+Emojize, you'll want to add the entirety of the `NSStri
 ```
 
 ```objective-c
-
+NSString *emojiString = @"This comment has an emoji :mushroom:";
+NSLog(@"%@", [emojiString emojizedString]);
 ```
 
 ---

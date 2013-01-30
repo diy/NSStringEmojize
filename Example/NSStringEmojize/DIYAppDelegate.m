@@ -7,6 +7,7 @@
 //
 
 #import "DIYAppDelegate.h"
+#import "DIYViewController.h"
 
 @implementation DIYAppDelegate
 
@@ -16,6 +17,10 @@
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
+    
+    DIYViewController *vc = [[DIYViewController alloc] init];
+    self.window.rootViewController = vc;
+    
     return YES;
 }
 

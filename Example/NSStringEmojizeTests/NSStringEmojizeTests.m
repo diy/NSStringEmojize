@@ -14,7 +14,7 @@
 
 - (void)testCheatcodes
 {
-    NSString *emojiString = @"This comment has a smiley :mushroom:";
+    NSString *emojiString = @"This comment has an emoji :mushroom:";
     STAssertTrue([[emojiString emojizedString] rangeOfString:@"\U0001F344"].location != NSNotFound, nil);
 }
 
