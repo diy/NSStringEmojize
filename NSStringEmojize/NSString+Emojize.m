@@ -15,7 +15,7 @@
     return [NSString emojizedStringWithString:self];
 }
 
-+ (NSString *)emojizedStringWithString:(NSString *)aString
++ (NSString *)emojizedStringWithString:(NSString *)text
 {
     NSDictionary *emojiDict = @{
         @":+1:"                                : @"\U0001F44D",
@@ -864,12 +864,16 @@
         @":zap:"                               : @"\U000026A1",
         @":zzz:"                               : @"\U0001F4A4"
     };
-
-    __block NSString *text = aString;
-    [emojiDict enumerateKeysAndObjectsUsingBlock:^(NSString *cheat, NSString *unicode, BOOL *stop) {
-        text = [text stringByReplacingOccurrencesOfString:cheat withString:unicode];
-    }];
-
+    
+    // substitude matched emojis
+    NSRegularExpression *regex = [[NSRegularExpression alloc] initWithPattern:@"(:\\S+:)" options:NSRegularExpressionCaseInsensitive error:NULL];
+    NSArray *results = [regex matchesInString:text options:NSMatchingReportCompletion range:NSMakeRange(0, text.length)];
+    for (NSTextCheckingResult *result in [results reverseObjectEnumerator]) {
+        NSString *code = [text substringWithRange:result.range];
+        NSString *unicode = emojiDict[code];
+        if (!unicode) continue;
+        text = [text stringByReplacingOccurrencesOfString:code withString:unicode];
+	}
     return text;
 }
 
