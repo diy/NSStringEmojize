@@ -12,6 +12,7 @@
 @interface NSString (Emojize)
 
 - (NSString *)emojizedString;
-+ (NSString *)emojizedStringWithString:(NSString *)aString;
++ (NSString *)emojizedStringWithString:(NSString *)text;
++ (NSDictionary *)emojiAliases;
 
 @end
