@@ -17,16 +17,33 @@
 
 + (NSString *)emojizedStringWithString:(NSString *)text
 {
-    // substitude matched emojis
-    NSRegularExpression *regex = [[NSRegularExpression alloc] initWithPattern:@"(:\\S+:)" options:NSRegularExpressionCaseInsensitive error:NULL];
-    NSArray *results = [regex matchesInString:text options:NSMatchingReportCompletion range:NSMakeRange(0, text.length)];
-    for (NSTextCheckingResult *result in [results reverseObjectEnumerator]) {
-        NSString *code = [text substringWithRange:result.range];
-        NSString *unicode = self.emojiAliases[code];
-        if (!unicode) continue;
-        text = [text stringByReplacingOccurrencesOfString:code withString:unicode];
-	}
-    return text;
+    static dispatch_once_t onceToken;
+    static NSRegularExpression *regex = nil;
+    dispatch_once(&onceToken, ^{
+        regex = [[NSRegularExpression alloc] initWithPattern:@"(:[a-z0-9-+_]+:)" options:NSRegularExpressionCaseInsensitive error:NULL];
+    });
+    
+    __block NSString *resultText = text;
+    NSRange matchingRange = NSMakeRange(0, [resultText length]);
+    [regex enumerateMatchesInString:resultText options:NSMatchingReportCompletion range:matchingRange usingBlock:
+     ^(NSTextCheckingResult *result, NSMatchingFlags flags, BOOL *stop) {
+         if ( result &&
+             ([result resultType] == NSTextCheckingTypeRegularExpression) &&
+             !(flags & NSMatchingInternalError) ) {
+             
+             NSRange range = result.range;
+             if (range.location != NSNotFound) {
+                 NSString *code = [text substringWithRange:range];
+                 NSString *unicode = self.emojiAliases[code];
+                 if (unicode)
+                     resultText = [resultText stringByReplacingOccurrencesOfString:code withString:unicode];
+             }
+             
+         }
+         
+     }];
+    
+    return resultText;
 }
 
 + (NSDictionary *)emojiAliases {
