@@ -13,6 +13,7 @@
 
 - (NSString *)emojizedString;
 + (NSString *)emojizedStringWithString:(NSString *)text;
++ (NSString *)demojizedStringWithString:(NSString*)text;
 + (NSDictionary *)emojiAliases;
 
 @end
