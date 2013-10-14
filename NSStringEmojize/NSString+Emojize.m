@@ -45,7 +45,18 @@
     
     return resultText;
 }
-
++ (NSString *)demojizedStringWithString:(NSString*)text{
+    static dispatch_once_t onceToken;
+    static NSRegularExpression *regex = nil;
+    dispatch_once(&onceToken, ^{
+        regex = [[NSRegularExpression alloc] initWithPattern:@"(\\UD000[A-F0-9]{5})" options:NSRegularExpressionCaseInsensitive error:NULL];
+    });
+    NSString *resultText = text;
+    for (NSString *key in [self.emojiAliases allKeys]){
+        resultText = [resultText stringByReplacingOccurrencesOfString:self.emojiAliases[key]  withString:key];
+    }
+    return resultText;
+}
 + (NSDictionary *)emojiAliases {
     static NSDictionary *_emojiAliases;
     static dispatch_once_t onceToken;
