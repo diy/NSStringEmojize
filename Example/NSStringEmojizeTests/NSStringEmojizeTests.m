@@ -12,10 +12,16 @@
 
 @implementation NSStringEmojizeTests
 
-- (void)testCheatcodes
+- (void)testFound
 {
     NSString *emojiString = @"This comment has an emoji :mushroom:";
     STAssertTrue([[emojiString emojizedString] rangeOfString:@"\U0001F344"].location != NSNotFound, nil);
+}
+
+- (void)testNotFound
+{
+    NSString *emojiString = @"This comment has an emoji :qwertyasdf:";
+    STAssertTrue([[emojiString emojizedString] rangeOfString:@"\U0001F344"].location == NSNotFound, nil);
 }
 
 @end

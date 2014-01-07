@@ -36,6 +36,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C3627488187B8D4E002E44F8 /* emojis.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = emojis.h; sourceTree = "<group>"; };
 		DEC769E516B9AE7600764C30 /* NSStringEmojize.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NSStringEmojize.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DEC769E816B9AE7600764C30 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		DEC769EA16B9AE7600764C30 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -165,6 +166,7 @@
 		DEC76A1D16B9AEEE00764C30 /* NSStringEmojize */ = {
 			isa = PBXGroup;
 			children = (
+				C3627488187B8D4E002E44F8 /* emojis.h */,
 				DEC76A1E16B9AEEE00764C30 /* NSString+Emojize.h */,
 				DEC76A1F16B9AEEE00764C30 /* NSString+Emojize.m */,
 			);
