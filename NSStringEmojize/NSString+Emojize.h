@@ -14,5 +14,6 @@
 - (NSString *)emojizedString;
 + (NSString *)emojizedStringWithString:(NSString *)text;
 + (NSDictionary *)emojiAliases;
++ (NSDictionary *)reverseEmojiAliases;
 
 @end
