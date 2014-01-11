@@ -55,11 +55,11 @@
     static NSDictionary *_reverseEmojiAliases;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        NSDictionary* emojiAliases = [self emojiAliases];
+        NSDictionary *emojiAliases = [self emojiAliases];
         NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
-        NSSet* uniqueEmoji = [NSSet setWithArray:[emojiAliases allValues]];
+        NSSet *uniqueEmoji = [NSSet setWithArray:[emojiAliases allValues]];
         [uniqueEmoji enumerateObjectsUsingBlock:^(NSString *emoji, BOOL *stop) {
-            NSString* code = [[emojiAliases allKeysForObject:emoji] firstObject];
+            NSString *code = [[emojiAliases allKeysForObject:emoji] firstObject];
             if (!code) {
                 return;
             }
