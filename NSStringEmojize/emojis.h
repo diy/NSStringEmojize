@@ -580,6 +580,7 @@
     @":point_right:"                       : @"\U0001F449", \
     @":point_up:"                          : @"\U0000261D", \
     @":point_up_2:"                        : @"\U0001F446", \
+    @":middle_finger:"                     : @"\U0001F595", \
     @":police_car:"                        : @"\U0001F693", \
     @":poodle:"                            : @"\U0001F429", \
     @":poop:"                              : @"\U0001F4A9", \
