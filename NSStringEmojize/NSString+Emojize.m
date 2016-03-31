@@ -42,6 +42,36 @@
     return resultText;
 }
 
+- (NSString *)unemojizedString
+{
+    return [NSString unemojizedStringWithString:self];
+}
+
++ (NSString *)unemojizedStringWithString:(NSString *)text
+{
+    NSMutableString *ret = [NSMutableString stringWithString:text];
+    [[self reverseEmojiAliases] enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
+        [ret replaceOccurrencesOfString:key withString:obj options:nil range:NSMakeRange(0, ret.length)];
+    }];
+    return ret;
+}
+
++ (NSDictionary *)reverseEmojiAliases
+{
+    static NSDictionary *_reverseEmojiAliases;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        NSMutableDictionary *reverseAliases = [NSMutableDictionary new];
+        [[self emojiAliases] enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
+            [reverseAliases setObject:key forKey:obj];
+        }];
+        
+        _reverseEmojiAliases = reverseAliases;
+    });
+    return _reverseEmojiAliases;
+}
+
+
 + (NSDictionary *)emojiAliases {
     static NSDictionary *_emojiAliases;
     static dispatch_once_t onceToken;
